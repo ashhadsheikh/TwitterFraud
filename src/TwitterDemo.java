@@ -20,13 +20,13 @@ public class TwitterDemo {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		TestDB app = new TestDB();
 		cb.setDebugEnabled(true)
-				.setOAuthConsumerKey("fV18kaYEFs0BvqLXvSZxwGZPB")
+				.setOAuthConsumerKey("***************************************")
 				.setOAuthConsumerSecret(
-						"nZ1HRF6gF9TTH38uk0QEyteB34QDPxkrfvr0AJMPgxX0Ij0I5C")
+						"*********************************************")
 				.setOAuthAccessToken(
-						"797494618950606850-BPxOMAEMdqOwbrqa00gX5KfuqIZlsYO")
+						"*************************************************")
 				.setOAuthAccessTokenSecret(
-						"Ojpl2RupXQ8GemGHUdFXh2T68ls6bfdw66XXVebX3jcZQ");
+						"*************************************************");
 
 		TwitterStream twitterStream = new TwitterStreamFactory(cb.build())
 				.getInstance();
