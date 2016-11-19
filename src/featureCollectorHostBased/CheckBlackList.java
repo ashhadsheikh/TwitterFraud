@@ -1,3 +1,4 @@
+package featureCollectorHostBased;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -61,8 +62,8 @@ public class CheckBlackList {
 		Statement stmt = null;
 		try {
 			stmt = con.createStatement();
-			String sql = "select blacklisturl from urls.blacklist where concat('http://www.',blacklisturl)="
-					+ url;
+			String sql = "select blacklisturl from urls.blacklist where concat('http://www.',blacklisturl)='"
+					+ url+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				return true;

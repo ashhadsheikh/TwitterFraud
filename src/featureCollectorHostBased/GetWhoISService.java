@@ -1,3 +1,5 @@
+package featureCollectorHostBased;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -47,45 +49,69 @@ public class GetWhoISService {
 	}
 
 	public String getDomainName() {
-		if (data.has("DomainName"))
-			return data.getString("DomainName");
-		else
+		try {
+			if (data.has("DomainName"))
+				return data.getString("DomainName");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 	public String getLastUpdated() {
-		if (data.has("LastupdateofWHOISdatabase"))
-			return data.getString("LastupdateofWHOISdatabase");
-		else
+		try {
+			if (data.has("LastupdateofWHOISdatabase"))
+				return data.getString("LastupdateofWHOISdatabase");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 	public String getRegistrar() {
-		if (data.has("RegistrarWHOISServer"))
-			return data.getString("RegistrarWHOISServer");
-		else
+		try {
+			if (data.has("RegistrarWHOISServer"))
+				return data.getString("RegistrarWHOISServer");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 	public String getRegistrarURL() {
-		if (data.has("RegistrarURL"))
-			return data.getString("RegistrarURL");
-		else
+		try {
+			if (data.has("RegistrarURL"))
+				return data.getString("RegistrarURL");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 	public String getRegistrant() {
-		if (data.has("RegistrantName"))
-			return data.getString("RegistrantName");
-		else
+		try {
+			if (data.has("RegistrantName"))
+				return data.getString("RegistrantName");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 	public String getRegistrantOrganization() {
-		if (data.has("RegistrantOrganization"))
-			return data.getString("RegistrantOrganization");
-		else
+		try {
+			if (data.has("RegistrantOrganization"))
+				return data.getString("RegistrantOrganization");
+			else
+				return "";
+		} catch (Exception e) {
 			return "";
+		}
 	}
 
 }

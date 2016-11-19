@@ -1,4 +1,9 @@
+package twitterStream;
+
 import java.sql.SQLException;
+
+import dbHandler.TestDB;
+import featureCollectorHostBased.CheckBlackList;
 import twitter4j.FilterQuery;
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -15,7 +20,7 @@ public class TwitterDemo {
 	public static void main(String[] args) throws TwitterException,
 			SQLException {
 		// TODO Auto-generated method stub
-		CheckBlackList cbl=new CheckBlackList();
+		CheckBlackList cbl = new CheckBlackList();
 		System.out.println(cbl.isBlacklisted("'http://www.youtube.com'"));
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		TestDB app = new TestDB();
@@ -52,7 +57,6 @@ public class TwitterDemo {
 					System.out.println(status.isRetweet());
 					System.out.println(status.getCreatedAt());
 					System.out.println("============");
-					;
 				}
 			}
 
