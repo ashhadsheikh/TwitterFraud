@@ -16,15 +16,28 @@ public static void main(String [] parms) throws ParseException, MalformedURLExce
 	try {
 		TestDB tb=new TestDB();
 		ArrayList<String> links=tb.getMostTweetedLinks();
-		for (String string : links) {
-			FeatureTagging.featureCollector(string);
+		for (String link : links) {
+			FeatureTagging.featureCollector(link);
 			HashMap<String, Boolean> features=FeatureTagging.getFeatureVector();
-			
-			System.out.println(string+","+features.get("isBlacklisted")+","+features.get("isFullCircle")+","+features.get("isASNSame")+","+features.get("isCountryMalicious")+","+features.get("checkLifeline"));
+			tb.addResult(link, 
+					convertBooleanToFlag(features.get("isBlacklisted")),
+					convertBooleanToFlag(features.get("isFullCircle")),
+					convertBooleanToFlag(features.get("isASNSame")),
+					convertBooleanToFlag(features.get("isCountryMalicious")),
+					convertBooleanToFlag(features.get("checkLifeline")));
+			System.out.println(link+","+features.get("isBlacklisted")+","+features.get("isFullCircle")+","+features.get("isASNSame")+","+features.get("isCountryMalicious")+","+features.get("checkLifeline"));
 		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+}
+
+public static String convertBooleanToFlag(boolean value){
+	if (value)
+		return "1";
+	else
+		return "0";
+				
 }
 }

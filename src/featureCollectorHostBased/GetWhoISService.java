@@ -15,10 +15,10 @@ static String expiry="";
 
 	public GetWhoISService(String url) throws ParseException {
 		WHOisProtocol(url);
-		JSONObject obj = new JSONObject(WhoisCall(url));
+		/*JSONObject obj = new JSONObject(WhoisCall(url));
 		if (obj.getString("response_code").toString().equals("success")) {
 			data = obj.getJSONObject("formatted_data");
-		}
+		}*/
 	}
 
 	public static String WhoisCall(String IP) {
