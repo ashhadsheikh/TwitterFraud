@@ -102,7 +102,41 @@ public class TestDB {
 		}
 		return false;
 	}
-
+	public boolean test() {
+		Statement stmt = null;
+		try {
+			stmt = con.createStatement();
+			String sql = "select * from urls.resultsystem";
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				int score=0;
+				
+				if(rs.getString("isBlacklisted").equals("0")){
+					if(rs.getString("Lifeline").equals("1")){
+						score+=40;
+					}
+					if(rs.getString("isFullCircle").equals("1")){
+						score+=40;
+					}
+					if(rs.getString("isASNSame").equals("1")){
+						score+=10;
+					}
+					if(rs.getString("isCountryMalicious").equals("1")){
+						score+=10;
+					}
+				}else{
+					score=100;
+				}
+				//if(rs.getString("ManualResult").equals("N"))
+					if(score>50)
+				System.out.println(rs.getString("idresultSystem")+", Score: "+score+" , Manual: "+rs.getString("ManualResult"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public ArrayList<String> getMostTweetedLinks() {
 		ArrayList<String> links = new ArrayList<String>();
 		Statement stmt = null;
