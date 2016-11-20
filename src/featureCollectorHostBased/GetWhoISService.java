@@ -4,13 +4,17 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.text.ParseException;
+import org.apache.commons.net.whois.WhoisClient;
 import org.json.JSONObject;
 
 public class GetWhoISService {
 	JSONObject data;
+static String created="";
+static String expiry="";
 
-	public GetWhoISService(String url) {
+	public GetWhoISService(String url) throws ParseException {
+		WHOisProtocol();
 		JSONObject obj = new JSONObject(WhoisCall(url));
 		if (obj.getString("response_code").toString().equals("success")) {
 			data = obj.getJSONObject("formatted_data");
@@ -113,5 +117,37 @@ public class GetWhoISService {
 			return "";
 		}
 	}
+	public String getRegistrationDate(){
+		return created;
+	}
+public String getExpiryDate(){
+		return expiry;
+	}
 
+public static void WHOisProtocol() throws ParseException{
+	 StringBuilder sb = new StringBuilder("");
+     WhoisClient wic = new WhoisClient();
+     try {
+        wic.connect(WhoisClient.DEFAULT_HOST);
+        String whoisData1 = wic.query("=" + "techlogix.com");
+        sb.append(whoisData1);
+        wic.disconnect();
+     } catch (Exception e) {
+        e.printStackTrace();
+     }
+     //System.out.println(sb.toString());
+     String lines[] = sb.toString().split("\\r?\\n");
+     for(int i=0;i<lines.length;i++){
+    	 if(lines[i].contains("Updated")){
+    	 }
+    	 if(lines[i].contains("Creation")){
+    		 String[] splited = lines[i].split("\\s+");
+    		 created=splited[3];
+    	 }
+    	 if(lines[i].contains("Expiration")){
+    		 String[] splited = lines[i].split("\\s+");
+    		 expiry=splited[3];
+    	 }
+     }
+}
 }

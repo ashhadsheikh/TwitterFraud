@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.xbill.DNS.TextParseException;
@@ -19,7 +20,7 @@ public class FeatureTagging {
 	
 
 	public static void featureCollector(String uri) throws SQLException,
-			UnknownHostException, TextParseException, MalformedURLException {
+			UnknownHostException, TextParseException, MalformedURLException, ParseException {
 		features = new ArrayList<Boolean>();
 		URL url = new URL(uri);
 		String host = url.getHost();
@@ -48,6 +49,7 @@ public class FeatureTagging {
 		System.out.println("Latitude: " + ggp.getLatitude());
 		System.out.println("Longitude: " + ggp.getLongitude());
 		CountryTagging ct=new CountryTagging();
+		System.out.println("isCountryMalicious: " + ct.isCountryMalicious(ggp.getCountry()));
 		/*==================================================*/
 		features.add(ct.isCountryMalicious(ggp.getCountry()));
 		/*==================================================*/
@@ -58,6 +60,10 @@ public class FeatureTagging {
 		System.out.println("Registrant: " + gwois.getRegistrant());
 		System.out.println("Registrant Organization: "
 				+ gwois.getRegistrantOrganization());
+		System.out.println("Registration Date: " + gwois.getRegistrationDate());
+		System.out.println("Expiry Date: " + gwois.getExpiryDate());
+		WhoIsTagging ait=new WhoIsTagging();
+		ait.isUrlMalicious(gwois.getRegistrationDate(), gwois.getExpiryDate());
 	}
 
 }

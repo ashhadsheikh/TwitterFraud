@@ -61,6 +61,7 @@ public class CheckBlackList {
 	public boolean isBlacklisted(String url) {
 		Statement stmt = null;
 		try {
+			System.out.println("Querying Blacklist Database............");
 			stmt = con.createStatement();
 			String sql = "select blacklisturl from urls.blacklist where concat('http://www.',blacklisturl)='"
 					+ url+"'";
