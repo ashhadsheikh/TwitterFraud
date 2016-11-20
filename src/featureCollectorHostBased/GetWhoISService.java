@@ -14,7 +14,7 @@ static String created="";
 static String expiry="";
 
 	public GetWhoISService(String url) throws ParseException {
-		WHOisProtocol();
+		WHOisProtocol(url);
 		JSONObject obj = new JSONObject(WhoisCall(url));
 		if (obj.getString("response_code").toString().equals("success")) {
 			data = obj.getJSONObject("formatted_data");
@@ -124,12 +124,12 @@ public String getExpiryDate(){
 		return expiry;
 	}
 
-public static void WHOisProtocol() throws ParseException{
+public static void WHOisProtocol(String url) throws ParseException{
 	 StringBuilder sb = new StringBuilder("");
      WhoisClient wic = new WhoisClient();
      try {
         wic.connect(WhoisClient.DEFAULT_HOST);
-        String whoisData1 = wic.query("=" + "techlogix.com");
+        String whoisData1 = wic.query("=" + url);
         sb.append(whoisData1);
         wic.disconnect();
      } catch (Exception e) {

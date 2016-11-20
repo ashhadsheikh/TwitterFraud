@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.sql.Statement;
 
@@ -82,5 +83,26 @@ public class TestDB {
 			}
 			return false;
 		}
+	public ArrayList<String> getMostTweetedLinks(){
+		ArrayList<String> links=new ArrayList<String>();
+		Statement stmt=null;
+		try {
+			stmt=con.createStatement();
+			String sql = "select  tweetlink from urls.tweets where tweetlink not like 'https://twitter%'group by tweetlink order by count(tweetlink) desc LIMIT 50";
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println("hello");
+			while(rs.next()){
+				String link = rs.getString("tweetlink");
+				links.add(link);
+				//System.out.println(link);
+		      }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return links;
 	}
+	}
+
 
