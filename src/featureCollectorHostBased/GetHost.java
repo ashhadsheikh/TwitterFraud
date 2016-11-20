@@ -1,3 +1,4 @@
+package featureCollectorHostBased;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.xbill.DNS.ExtendedResolver;

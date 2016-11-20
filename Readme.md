@@ -1,3 +1,3 @@
-Twitter Fraud
+# Twitter Fraud
+## This repository contains code to identify malicious links in twitter streams
 
-A framework to detect malicious websites in twitter streams

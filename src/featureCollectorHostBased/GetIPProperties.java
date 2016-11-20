@@ -1,3 +1,4 @@
+package featureCollectorHostBased;
 // Print out a sorted list of mail exchange servers for a network domain name
 import org.json.JSONObject;
 import org.xbill.DNS.MXRecord;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 //isASNSame("techlogix.com")
 public class GetIPProperties {
-	public static boolean allElementsTheSame(ArrayList<String> array) {
+	public boolean allElementsTheSame(ArrayList<String> array) {
 	    if (array.size() == 0) {
 	        return true;
 	    } else {
@@ -30,7 +31,7 @@ public class GetIPProperties {
 	        return true;
 	    }
 	}
-	public static boolean isASNSame(String hostname) throws UnknownHostException,
+	public  boolean isASNSame(String hostname) throws UnknownHostException,
 			TextParseException {
 		ArrayList<String> al = new ArrayList<String>();
 		ArrayList<String> ASN = new ArrayList<String>();
@@ -38,6 +39,7 @@ public class GetIPProperties {
 		System.out.println("A-Server: " + ip2.getHostAddress());
 		al.add(ip2.getHostAddress());
 		Record[] recordsMX = new Lookup(hostname, Type.MX).run();
+		try{
 		for (int i = 0; i < recordsMX.length; i++) {
 			MXRecord ns = (MXRecord) recordsMX[i];
 			al.add(InetAddress.getByName(ns.getTarget().toString())
@@ -46,6 +48,7 @@ public class GetIPProperties {
 					+ InetAddress.getByName(ns.getTarget().toString())
 							.getHostAddress());
 		}
+		
 		Record[] records = new Lookup(hostname, Type.NS).run();
 		for (int i = 0; i < records.length; i++) {
 			NSRecord ns = (NSRecord) records[i];
@@ -55,7 +58,10 @@ public class GetIPProperties {
 					+ InetAddress.getByName(ns.getTarget().toString())
 							.getHostAddress());
 		}
-
+		}catch(Exception e){
+			return false;
+		}
+		
 		for (String ip : al) {
 			String output = "";
 			try {
